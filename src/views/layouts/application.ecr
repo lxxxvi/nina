@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="/js/nina.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/nina.css"/>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="text-center">
+        <h1>Check SSL certificate</h1>
+        <input type="text" id="hostname" placeholder="example.com"/>
+        <div id="ssl-validity" class="hidden">
+          Certificate for
+          <span id="ssl-validity-hostname"></span>
+          is valid until
+          <span id="ssl-validity-valid_until"></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
