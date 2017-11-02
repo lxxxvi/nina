@@ -17,7 +17,18 @@ var sslValidityValidUntilSpan = function() {
   return document.getElementById("ssl-validity-valid_until");
 }
 
+var displayLoader = function(boolean) {
+  let loader = document.getElementById("loader");
+
+  if(boolean) {
+    loader.classList.remove("hidden");
+  } else {
+    loader.classList.add("hidden");
+  }
+}
+
 var sendInputToServer = function() {
+  displayLoader(true);
   ws.send(hostnameInput().value);
 }
 
@@ -37,5 +48,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 ws.onmessage = function(response) {
+  displayLoader(false);
   updateSslValidityDiv(response.data);
 };

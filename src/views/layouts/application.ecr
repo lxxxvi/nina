@@ -5,12 +5,16 @@
     <script src="/js/nina.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/nina.css"/>
+    <link rel="stylesheet" href="/css/spinner.css"/>
   </head>
   <body>
     <div class="container-fluid">
       <div class="text-center">
         <h1>Check SSL certificate</h1>
         <input type="text" id="hostname" placeholder="example.com"/>
+        <div id="loader" class="hidden">
+          <span class="spinner orange"></span>
+        </div>
         <div id="ssl-validity" class="hidden">
           Certificate for
           <span id="ssl-validity-hostname"></span>

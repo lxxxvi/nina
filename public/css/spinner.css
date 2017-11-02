@@ -1,0 +1,23 @@
+@keyframes spin {
+  100%  { transform: rotate(360deg);  }
+}
+
+.spinner {
+  border-radius: 15px;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+  border: transparent 5px dotted;
+  animation-name: spin;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.orange {
+  border-top-color: OrangeRed;
+  border-right-color: Tomato;
+  border-bottom-color: DarkOrange;
+  border-left-color: Orange;
+}
