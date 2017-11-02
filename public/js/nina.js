@@ -1,4 +1,5 @@
-var ws = new WebSocket("ws://" + location.host + "/socket");
+let websocketProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+var ws = new WebSocket(websocketProtocol + "//" + location.host + "/socket");
 
 var hostnameInput = function() {
   return document.getElementById("hostname");
