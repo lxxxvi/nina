@@ -9,6 +9,10 @@ var sslValidityDiv = function() {
   return document.getElementById("ssl-validity");
 }
 
+var errorDiv = function() {
+  return document.getElementById("error");
+}
+
 var sslValidityHostnameSpan = function() {
   return document.getElementById("ssl-validity-hostname");
 }
@@ -27,16 +31,48 @@ var displayLoader = function(boolean) {
   }
 }
 
+var displaySslValidity = function(boolean) {
+  let sslValidity = sslValidityDiv();
+
+  if(boolean) {
+    sslValidity.classList.remove("hidden");
+  } else {
+    sslValidity.classList.add("hidden");
+  }
+}
+
+var displayError = function(boolean) {
+  let error = errorDiv();
+
+  if(boolean) {
+    error.classList.remove("hidden");
+  } else {
+    error.classList.add("hidden");
+  }
+
+}
+
 var sendInputToServer = function() {
-  displayLoader(true);
+  initializeDivs();
   ws.send(hostnameInput().value);
+}
+
+var initializeDivs = function() {
+  displaySslValidity(false);
+  displayLoader(true);
+  displayError(false);
 }
 
 var updateSslValidityDiv = function(data) {
   let parsed = JSON.parse(data);
-  sslValidityHostnameSpan().innerHTML = parsed.hostname;
-  sslValidityValidUntilSpan().innerHTML = parsed.valid_until;
-  sslValidityDiv().classList.remove("hidden");
+
+  if(parsed.status == "success") {
+    sslValidityHostnameSpan().innerHTML = parsed.hostname;
+    sslValidityValidUntilSpan().innerHTML = parsed.valid_until;
+    sslValidityDiv().classList.remove("hidden");
+  } else {
+    displayError(true);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
