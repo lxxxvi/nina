@@ -1,27 +1,33 @@
-# nina
+# Nina
 
-TODO: Write a description here
+Nina checks domains for SSL certificates and displays the expiration date of certificates.
 
 ## Installation
 
-TODO: Write installation instructions here
+Nina runs on [Crystal](https://crystal-lang.org/) using [Kemal](http://kemalcr.com). Another prerequisite to run this is [OpenSSL](https://www.openssl.org/).
 
-## Usage
+```
+git clone git@github.com:lxxxvi/nina.git
+cd ./nina
+shards install
+crystal run ./src/nina.cr
+```
 
-TODO: Write usage instructions here
+It won't run on Windows.
 
-## Development
+## Targets
 
-TODO: Write development instructions here
+You can have domains stored as "targets" and list them on the page.
 
-## Contributing
+i.e. if you want to have `google.com`:
 
-1. Fork it ( https://github.com/[your-github-name]/nina/fork )
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create a new Pull Request
+```
+cd ./nina
+touch ./public/targets/google.com.txt
+```
 
-## Contributors
+Then refresh the page and hit the Refresh button.
 
-- [[your-github-name]](https://github.com/[your-github-name]) mario - creator, maintainer
+## Credits
+
+[Nina Simone's "Funkier Than a Mosquito's Tweeter"](https://www.youtube.com/watch?v=5GsCHQkulr4)
