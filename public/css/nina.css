@@ -1,14 +1,26 @@
+h1 {
+  color: Tomato;
+}
+
 input#hostname {
   margin: 50px 0;
   padding: 10px 40px;
   font-size: 200%;
+  text-align: center;
+  border-width: 2px;
+  border-style: solid;
+  border-top-color: Tomato;
+  border-right-color: Orange;
+  border-bottom-color: Orange;
+  border-left-color: Tomato;
+  color: OrangeRed;
 }
 
 div#ssl-validity {
   color: #444;
 }
 
-div#ssl-validity span {
+.hostname, .valid_until {
   color: #000;
   margin: 0 0 16px 0;
   display: block;
@@ -16,6 +28,48 @@ div#ssl-validity span {
   font-weight: 500;
 }
 
-input#hostname {
-  text-align: center;
+.hostname {
+  color: Tomato;
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+ul {
+  margin: 40px 0;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+}
+
+li {
+  padding: 20px 0;
+  border-style: solid;
+  border-color: #ddd;
+  border-width: 1px 1px 0 1px;
+}
+
+li:last-child {
+  border-bottom-width: 1px;
+}
+
+button {
+  padding: 5px 80px;
+  margin: 50px 0 0;
+  display: inline-block;
+  font-size: 120%;
+  color: White;
+  background-color: Coral;
+  border-width: 2px;
+  border-style: solid;
+  border-top-color: OrangeRed;
+  border-right-color: Tomato;
+  border-bottom-color: DarkOrange;
+  border-left-color: Orange;
+}
+
+button:hover {
+  border-top-color: DarkOrange;
+  border-right-color: Orange;
+  border-bottom-color: OrangeRed;
+  border-left-color: Tomato;
 }

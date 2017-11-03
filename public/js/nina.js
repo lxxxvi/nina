@@ -5,6 +5,10 @@ var hostnameInput = function() {
   return document.getElementById("hostname");
 }
 
+var refreshTargetsButton = function() {
+  return document.getElementById("refresh-targets");
+}
+
 var sslValidityDiv = function() {
   return document.getElementById("ssl-validity");
 }
@@ -54,7 +58,7 @@ var displayError = function(boolean) {
 
 var sendInputToServer = function() {
   initializeDivs();
-  ws.send(hostnameInput().value);
+  ws.send("CHECK " + hostnameInput().value);
 }
 
 var initializeDivs = function() {
@@ -64,15 +68,41 @@ var initializeDivs = function() {
 }
 
 var updateSslValidityDiv = function(data) {
-  let parsed = JSON.parse(data);
-
-  if(parsed.status == "success") {
-    sslValidityHostnameSpan().innerHTML = parsed.hostname;
-    sslValidityValidUntilSpan().innerHTML = parsed.valid_until;
-    sslValidityDiv().classList.remove("hidden");
+  if(data.status == "success") {
+    sslValidityHostnameSpan().innerHTML = data.hostname;
+    sslValidityValidUntilSpan().innerHTML = data.valid_until;
+    displaySslValidity(true);
   } else {
     displayError(true);
   }
+}
+
+ws.onopen = function() {
+  refreshTargetsList();
+}
+
+var refreshTargetsList = function() {
+  ws.send("GET");
+}
+
+var renderTargetsList = function(targets) {
+  let targetsList = document.getElementById("targets-list");
+
+  let listItems = targets.map(function(item) {
+    listItem  = "<li>";
+    listItem += "Certificate for"
+    listItem += '<span class="hostname">' + item.hostname + '</span>';
+    listItem += " is valid until ";
+    listItem += '<span class="valid_until">' + item.valid_until + '</span>';
+    listItem += "(";
+    listItem += "checked at "
+    listItem += item.checked_at
+    listItem += ")";
+    listItem += "</li>";
+    return listItem
+  });
+
+  targetsList.innerHTML = listItems.join("\n");
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -81,9 +111,22 @@ document.addEventListener("DOMContentLoaded", function() {
       sendInputToServer();
     }
   };
+
+  refreshTargetsButton().onclick = function() {
+    ws.send("REFRESH");
+  }
+
 });
 
 ws.onmessage = function(response) {
-  displayLoader(false);
-  updateSslValidityDiv(response.data);
+  let data = JSON.parse(response.data);
+
+  if(data.action == "CHECK") {
+    displayLoader(false);
+    updateSslValidityDiv(data.content);
+  } else if (data.action == "GET") {
+    renderTargetsList(data.content);
+  } else if (data.action == "REFRESH") {
+    refreshTargetsList();
+  }
 };
