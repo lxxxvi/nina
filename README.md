@@ -30,9 +30,9 @@ Then refresh the page and hit the Refresh button.
 
 ## Todo
 
-[ ] Tests (!)
-[ ] Bugfixing: certain domains fail
-[ ] Display more properties of certificates (e.g. Certificate Issuer, or "expires in ... days")
+* [ ] Tests (!)
+* [ ] Bugfixing: certain domains fail
+* [ ] Display more properties of certificates (e.g. Certificate Issuer, or "expires in ... days")
 
 ## Credits
 
